@@ -23,14 +23,14 @@ class Settings(BaseSettings):
     def assemble_db_connection(cls, v: Optional[str], info: Any) -> Any:
         if isinstance(v, str):
             return v
-        return str(PostgresDsn.build(
-            scheme="postgresql",
-            username=info.data.get("POSTGRES_USER"),
-            password=info.data.get("POSTGRES_PASSWORD"),
-            host=info.data.get("POSTGRES_SERVER"),
-            port=info.data.get("POSTGRES_PORT"),
-            path=info.data.get("POSTGRES_DB") or "",
-        )).replace("postgresql://", "postgresql+asyncpg://", 1)
+        
+        user = info.data.get("POSTGRES_USER")
+        password = info.data.get("POSTGRES_PASSWORD")
+        server = info.data.get("POSTGRES_SERVER")
+        port = info.data.get("POSTGRES_PORT")
+        db = info.data.get("POSTGRES_DB")
+        
+        return f"postgresql+asyncpg://{user}:{password}@{server}:{port}/{db}"
 
     # Redis
     REDIS_HOST: str = "localhost"
@@ -43,12 +43,12 @@ class Settings(BaseSettings):
     def assemble_redis_connection(cls, v: Optional[str], info: Any) -> Any:
         if isinstance(v, str):
             return v
-        return str(RedisDsn.build(
-            scheme="redis",
-            host=info.data.get("REDIS_HOST"),
-            port=info.data.get("REDIS_PORT"),
-            path=f"{info.data.get('REDIS_DB') or ''}",
-        ))
+            
+        host = info.data.get("REDIS_HOST")
+        port = info.data.get("REDIS_PORT")
+        db = info.data.get("REDIS_DB")
+        
+        return f"redis://{host}:{port}/{db}"
 
     # Security
     SECRET_KEY: str = "secret"
