@@ -11,7 +11,7 @@ services:
   auth-service-db:
     image: postgres:15-alpine
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./auth_service_db_volume/:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     env-file: .env
