@@ -3,19 +3,19 @@ services:
     build: .
     ports:
       - "127.0.0.1:8013:8000"
-    env-file: .env
+    env_file: .env
     depends_on:
       - auth-service-db
       - auth-service-redis
 
   auth-service-db:
     image: postgres:15-alpine
-    env-file: .env
+    env_file: .env
     volumes:
       - ./auth_service_db_volume/:/var/lib/postgresql/data
 
   auth-service-redis:
     image: redis:7-alpine
-    env-file: .env
+    env_file: .env
     volumes:
       - ./auth_service_redis_volume/:/data
