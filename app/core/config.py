@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Optional
 from pydantic import PostgresDsn, RedisDsn, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -24,13 +24,13 @@ class Settings(BaseSettings):
         if isinstance(v, str):
             return v
         return str(PostgresDsn.build(
-            scheme="postgresql+asyncpg",
+            scheme="postgresql",
             username=info.data.get("POSTGRES_USER"),
             password=info.data.get("POSTGRES_PASSWORD"),
             host=info.data.get("POSTGRES_SERVER"),
             port=info.data.get("POSTGRES_PORT"),
-            path=f"{info.data.get('POSTGRES_DB') or ''}",
-        ))
+            path=info.data.get("POSTGRES_DB") or "",
+        )).replace("postgresql://", "postgresql+asyncpg://", 1)
 
     # Redis
     REDIS_HOST: str = "localhost"
