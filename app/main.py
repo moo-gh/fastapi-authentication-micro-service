@@ -28,3 +28,4 @@ async def init_db():
 async def root():
     return {"message": f"Welcome to {settings.PROJECT_NAME}"}
 
+
