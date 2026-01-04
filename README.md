@@ -35,11 +35,6 @@ app/
 
 ## ⚙️ Setup & Installation
 
-### Prerequisites
-
-- Docker and Docker Compose
-- Python 3.10+ (if running locally)
-
 ### Environment Variables
 
 Create a `.env` file in the root directory and configure the following:
@@ -67,16 +62,6 @@ SMTP_PASSWORD=your-app-password
 EMAILS_FROM_EMAIL=noreply@example.com
 EMAILS_FROM_NAME="Auth Service"
 ```
-
-### Running with Docker
-
-1. Clone the repository.
-2. Build and start the containers:
-   ```bash
-   docker-compose up --build
-   ```
-3. The API will be available at `http://localhost:8013`.
-4. Access the interactive API documentation at `http://localhost:8013/docs`.
 
 ## 📡 API Endpoints
 
