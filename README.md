@@ -92,8 +92,3 @@ EMAILS_FROM_NAME="Auth Service"
 ## 🔒 Security
 
 This service uses HMAC SHA256 signatures for identity proofs. When a user is successfully verified, the service returns a payload containing user details and a signature. Other microservices can verify this signature using the same `SECRET_KEY` to trust the identity without re-verifying the email.
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
