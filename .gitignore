@@ -1,0 +1,4 @@
+.vscode
+.env
+auth_service_db_volume/
+auth_service_redis_volume/
