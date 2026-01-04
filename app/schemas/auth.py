@@ -20,3 +20,4 @@ class VerificationProof(BaseModel):
 
 class HealthResponse(BaseModel):
     status: str
+
