@@ -13,3 +13,4 @@ class User(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
     last_verified_at: Mapped[datetime] = mapped_column(DateTime, nullable=True)
 
+
