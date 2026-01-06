@@ -1,6 +1,8 @@
 from typing import Any, Optional
+
 from pydantic import PostgresDsn, RedisDsn, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
@@ -9,7 +11,7 @@ class Settings(BaseSettings):
 
     PROJECT_NAME: str = "Authentication Microservice"
     API_V1_STR: str = "/api/v1"
-    
+
     # Database
     POSTGRES_SERVER: str = "localhost"
     POSTGRES_USER: str = "postgres"
@@ -23,13 +25,13 @@ class Settings(BaseSettings):
     def assemble_db_connection(cls, v: Optional[str], info: Any) -> Any:
         if isinstance(v, str):
             return v
-        
+
         user = info.data.get("POSTGRES_USER")
         password = info.data.get("POSTGRES_PASSWORD")
         server = info.data.get("POSTGRES_SERVER")
         port = info.data.get("POSTGRES_PORT")
         db = info.data.get("POSTGRES_DB")
-        
+
         return f"postgresql+asyncpg://{user}:{password}@{server}:{port}/{db}"
 
     # Redis
@@ -43,11 +45,11 @@ class Settings(BaseSettings):
     def assemble_redis_connection(cls, v: Optional[str], info: Any) -> Any:
         if isinstance(v, str):
             return v
-            
+
         host = info.data.get("REDIS_HOST")
         port = info.data.get("REDIS_PORT")
         db = info.data.get("REDIS_DB")
-        
+
         return f"redis://{host}:{port}/{db}"
 
     # Security
@@ -64,5 +66,5 @@ class Settings(BaseSettings):
     EMAILS_FROM_EMAIL: str = "info@example.com"
     EMAILS_FROM_NAME: str = "Auth Service"
 
-settings = Settings()
 
+settings = Settings()

@@ -2,7 +2,6 @@
 
 set -e
 
-find social \
-	-type d -name migrations -prune -o \
+find app \
 	-type f -name "*.py" \
 	-exec "$@" {} +

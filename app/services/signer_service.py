@@ -1,8 +1,10 @@
-import hmac
 import hashlib
+import hmac
 import json
 import time
+
 from app.core.config import settings
+
 
 class VerificationSigner:
     @staticmethod
@@ -13,9 +15,7 @@ class VerificationSigner:
         # Ensure payload is sorted for consistent signing
         message = json.dumps(payload, sort_keys=True).encode("utf-8")
         signature = hmac.new(
-            settings.SECRET_KEY.encode("utf-8"),
-            message,
-            hashlib.sha256
+            settings.SECRET_KEY.encode("utf-8"), message, hashlib.sha256
         ).hexdigest()
         return signature
 
@@ -26,5 +26,3 @@ class VerificationSigner:
         """
         expected_signature = VerificationSigner.sign_payload(payload)
         return hmac.compare_digest(expected_signature, signature)
-
-

@@ -1,7 +1,10 @@
 from datetime import datetime
+
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.models.user import User
+
 
 class UserService:
     @staticmethod
@@ -11,13 +14,13 @@ class UserService:
         """
         result = await db.execute(select(User).where(User.email == email))
         user = result.scalars().first()
-        
+
         if not user:
             user = User(email=email)
             db.add(user)
             await db.commit()
             await db.refresh(user)
-        
+
         return user
 
     @staticmethod
@@ -29,6 +32,5 @@ class UserService:
         await db.commit()
         await db.refresh(user)
 
+
 user_service = UserService()
-
-
