@@ -4,16 +4,9 @@ PYTHON_VERSION=3.12
 .PHONY: format
 format: format-python
 
-.PHONY: lint
-lint: lint-python
-
 .PHONY: format-python
 format-python:
 	linters/format-python.sh
-
-.PHONY: lint-python
-lint-python:
-	@MYPYPATH=social linters/lint-python.sh
 
 .PHONY: clear-logs
 clear-logs:
