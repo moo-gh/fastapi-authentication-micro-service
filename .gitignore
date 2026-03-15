@@ -1,4 +1,23 @@
-.vscode
+# Environment and secrets
 .env
+
+# Python
+__pycache__/
+
+# Virtual environments
+.venv/
+venv/
+
+# Type checkers and linters
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.ruff_cache/
+
+# IDE and editors
+.vscode/
+.idea/
+
+# Project-specific: Docker volumes and local data
 auth_service_db_volume/
 auth_service_redis_volume/
